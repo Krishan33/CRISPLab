@@ -7,84 +7,28 @@
 <meta name="description" content="CRISPLab: programming responsive CRISPR hybrid materials. Krishan Kumar's research group at POLYMAT / UPV-EHU.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=Literata:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="bg-canvas" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
-<script>
-(function(){
-  var canvas = document.getElementById('bg-canvas');
-  var ctx = canvas.getContext('2d');
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var w, h, nodes = [];
-  var colors = ['#1565C0', '#0D3B66', '#4FA8D8'];
-
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+<style>
+  .repeat-mark{display:inline-flex;align-items:flex-end;gap:2.5px;height:18px;margin-right:9px;vertical-align:-3px;}
+  .repeat-mark span{display:block;width:3px;background:var(--teal);border-radius:1px;transform:scaleY(0);transform-origin:bottom;animation:bar-rise .5s cubic-bezier(.2,.8,.3,1) forwards;}
+  .repeat-mark span:nth-child(1){height:8px;animation-delay:.05s;}
+  .repeat-mark span:nth-child(2){height:16px;animation-delay:.15s;background:var(--indigo);}
+  .repeat-mark span:nth-child(3){height:11px;animation-delay:.25s;}
+  .repeat-mark span:nth-child(4){height:18px;animation-delay:.35s;background:var(--rose);}
+  .repeat-mark span:nth-child(5){height:6px;animation-delay:.45s;}
+  @keyframes bar-rise{to{transform:scaleY(1);}}
+  @media (prefers-reduced-motion: reduce){
+    .repeat-mark span{animation:none;transform:scaleY(1);}
   }
-  function initNodes(){
-    var count = Math.min(75, Math.max(28, Math.floor((w * h) / 24000)));
-    nodes = [];
-    for (var i = 0; i < count; i++){
-      nodes.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.6 + 1.1,
-        c: colors[Math.floor(Math.random() * colors.length)]
-      });
-    }
-  }
-  function frame(){
-    ctx.clearRect(0, 0, w, h);
-    for (var i = 0; i < nodes.length; i++){
-      var n = nodes[i];
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > w) n.vx *= -1;
-      if (n.y < 0 || n.y > h) n.vy *= -1;
-    }
-    for (var i = 0; i < nodes.length; i++){
-      for (var j = i + 1; j < nodes.length; j++){
-        var a = nodes[i], b = nodes[j];
-        var dx = a.x - b.x, dy = a.y - b.y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130){
-          ctx.strokeStyle = a.c;
-          ctx.globalAlpha = (1 - dist / 130) * 0.12;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha = 0.35;
-    for (var i = 0; i < nodes.length; i++){
-      var n = nodes[i];
-      ctx.fillStyle = n.c;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    if (!reduceMotion) requestAnimationFrame(frame);
-  }
-
-  window.addEventListener('resize', function(){ resize(); initNodes(); });
-  resize();
-  initNodes();
-  frame();
-})();
-</script>
+</style>
 
 <header>
   <div class="wrap nav-inner">
-    <a class="brand" href="#top">CRISP<em>Lab</em></a>
+    <a class="brand" href="#top"><span class="repeat-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>CRISPLab</a>
     <nav>
       <ul>
         <li><a href="#research">Research</a></li>
@@ -100,13 +44,20 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="wrap">
-      <p class="kicker">CRISPLab · Programming responsive CRISPR hybrid materials</p>
-      <h1>Materials that sense, stabilize, and steer CRISPR.</h1>
-      <p class="lede">CRISPLab designs stimuli-responsive and hybrid materials purpose-built around CRISPR/Cas9 — from single-particle engineering and conjugation chemistry to sensing, stabilization, and delivery across biological barriers.</p>
-      <div class="cta-row">
-        <a class="btn solid" href="#research">Our research</a>
-        <a class="btn ghost" href="#join">Join the lab</a>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1>Materials that sense, stabilize, and steer CRISPR.</h1>
+        <p class="lede">CRISPLab designs stimuli-responsive and hybrid materials built around one molecular system — the Cas9–sgRNA–DNA complex shown here — from single-particle engineering and conjugation chemistry to sensing, stabilization, and delivery across biological barriers.</p>
+        <div class="cta-row">
+          <a class="btn solid" href="#research">Our research</a>
+          <a class="btn ghost" href="#join">Join the lab</a>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <div class="specimen-plate">
+          <img src="cas9-structure.png" alt="Cas9–sgRNA–DNA ternary complex structure">
+        </div>
+        <p class="crispr-caption">Cas9–sgRNA–DNA ternary complex, bound to the HNH and RuvC domains that drive target cleavage.</p>
       </div>
     </div>
   </section>
@@ -115,20 +66,8 @@
   <section id="research">
     <div class="wrap">
       <div class="section-head">
-        <hr class="rule">
         <h2>Research</h2>
-        <p>Everything in the lab is built around one molecular system, approached from two directions: how we engineer around it, and where it gets applied.</p>
-      </div>
-
-      <div class="crispr-feature">
-        <div class="crispr-figure">
-          <img src="cas9-structure.png" alt="Cas9–sgRNA–DNA ternary complex structure">
-          <p class="crispr-caption">Cas9–sgRNA–DNA ternary complex, bound to the HNH and RuvC domains that drive target cleavage.</p>
-        </div>
-        <div class="crispr-text">
-          <h2>CRISPR / Cas9</h2>
-          <p>Every line of work in the lab starts from this complex: a Cas9 protein, its guide RNA, and the DNA target it binds and cleaves. Everything below is either a way of engineering materials around this system, or a disease context where getting it to work matters.</p>
-        </div>
+        <p>Everything in the lab is built around that one complex, approached from two directions: how we engineer around it, and where it gets applied.</p>
       </div>
 
       <p class="research-subhead">Engineering<span class="sub-desc">Materials-level strategies for protecting, controlling, and delivering the Cas9–sgRNA complex.</span></p>
@@ -286,9 +225,8 @@
   <section id="people">
     <div class="wrap">
       <div class="section-head">
-        <hr class="rule">
         <h2>People</h2>
-        <p>CRISPLab — Programming Responsive CRISPR Hybrid Materials. Working at the interface of polymer chemistry, CRISPR biology, and data.</p>
+        <p>A small group working at the interface of polymer chemistry, CRISPR biology, and data.</p>
       </div>
 
       <div class="pi-feature">
@@ -322,18 +260,17 @@
   <section>
     <div class="wrap">
       <div class="section-head">
-        <hr class="rule">
         <h2>Funding &amp; fellowships</h2>
         <p>The fellowship path that built the lab.</p>
       </div>
-      <div class="fund-grid">
-        <div class="fund-badge"><p class="f-org">DST-SERB</p><p class="f-role">India</p></div>
-        <div class="fund-badge"><p class="f-org">CSIR</p><p class="f-role">India</p></div>
-        <div class="fund-badge"><p class="f-org">NRF Korea</p><p class="f-role">National Research Foundation</p></div>
-        <div class="fund-badge"><p class="f-org">Juan de la Cierva</p><p class="f-role">AEI, Spain</p></div>
-        <div class="fund-badge"><p class="f-org">MSCA-COFUND</p><p class="f-role">ADAGIO, EU</p></div>
-        <div class="fund-badge"><p class="f-org">MSCA-IF</p><p class="f-role">EU</p></div>
-        <div class="fund-badge"><p class="f-org">Ramón y Cajal</p><p class="f-role">AEI, Spain — current</p></div>
+      <div class="fund-list">
+        <div class="fund-item"><p class="f-org">DST-SERB</p><p class="f-role">India</p></div>
+        <div class="fund-item"><p class="f-org">CSIR</p><p class="f-role">India</p></div>
+        <div class="fund-item"><p class="f-org">NRF Korea</p><p class="f-role">National Research Foundation</p></div>
+        <div class="fund-item"><p class="f-org">Juan de la Cierva</p><p class="f-role">AEI, Spain</p></div>
+        <div class="fund-item"><p class="f-org">MSCA-COFUND</p><p class="f-role">ADAGIO, EU</p></div>
+        <div class="fund-item"><p class="f-org">MSCA-IF</p><p class="f-role">EU</p></div>
+        <div class="fund-item"><p class="f-org">Ramón y Cajal</p><p class="f-role">AEI, Spain — current</p></div>
       </div>
     </div>
   </section>
@@ -342,7 +279,6 @@
   <section>
     <div class="wrap">
       <div class="section-head">
-        <hr class="rule">
         <h2>Editorial &amp; service</h2>
       </div>
       <div class="service-list">
@@ -366,7 +302,6 @@
   <section id="news">
     <div class="wrap">
       <div class="section-head">
-        <hr class="rule">
         <h2>News</h2>
       </div>
       <div class="news-list">
@@ -389,15 +324,12 @@
   <!-- JOIN -->
   <section id="join">
     <div class="wrap">
-      <div class="join-panel">
-        <div>
-          <h2>Join us</h2>
-          <p>We're looking for curious chemists, engineers, and biologists who want to build materials that do something. PhD, postdoc, and visiting positions are open.</p>
-          <a class="btn solid" style="border-color:var(--paper);" href="mailto:ks90859@gmail.com">Get in touch</a>
-        </div>
+      <div class="join-head">
+        <h2>Join us</h2>
+        <p>We're looking for curious chemists, engineers, and biologists who want to build materials that do something. PhD, postdoc, and visiting positions are open.</p>
         <div class="join-meta">
-          <div><span>Email</span><a href="mailto:ks90859@gmail.com">ks90859@gmail.com</a></div>
-          <div><span>Location</span><strong>Spain</strong></div>
+          <a class="btn solid" href="mailto:ks90859@gmail.com">Get in touch</a>
+          <span class="join-email">ks90859@gmail.com · Spain</span>
         </div>
       </div>
 
