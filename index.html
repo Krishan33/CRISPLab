@@ -12,6 +12,76 @@
 </head>
 <body>
 
+<canvas id="bg-canvas" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
+<script>
+(function(){
+  var canvas = document.getElementById('bg-canvas');
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var w, h, nodes = [];
+  var colors = ['#1C7A6E', '#493E8A', '#9C3459'];
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  function initNodes(){
+    var count = Math.min(70, Math.max(26, Math.floor((w * h) / 26000)));
+    nodes = [];
+    for (var i = 0; i < count; i++){
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        r: Math.random() * 1.5 + 1,
+        c: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+  }
+  function frame(){
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < nodes.length; i++){
+      var n = nodes[i];
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    }
+    for (var i = 0; i < nodes.length; i++){
+      for (var j = i + 1; j < nodes.length; j++){
+        var a = nodes[i], b = nodes[j];
+        var dx = a.x - b.x, dy = a.y - b.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 125){
+          ctx.strokeStyle = a.c;
+          ctx.globalAlpha = (1 - dist / 125) * 0.1;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 0.3;
+    for (var i = 0; i < nodes.length; i++){
+      var n = nodes[i];
+      ctx.fillStyle = n.c;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (!reduceMotion) requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('resize', function(){ resize(); initNodes(); });
+  resize();
+  initNodes();
+  frame();
+})();
+</script>
+
 <style>
   .repeat-mark{display:inline-flex;align-items:flex-end;gap:2.5px;height:18px;margin-right:9px;vertical-align:-3px;}
   .repeat-mark span{display:block;width:3px;background:var(--teal);border-radius:1px;transform:scaleY(0);transform-origin:bottom;animation:bar-rise .5s cubic-bezier(.2,.8,.3,1) forwards;}
