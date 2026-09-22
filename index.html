@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRAFTLab — Krishan Kumar</title>
-<meta name="description" content="Research group designing stimuli-responsive polymers and protein–polymer hybrid materials for gene delivery, biocatalysis, and theranostics.">
+<title>CRISPLab — Krishan Kumar</title>
+<meta name="description" content="CRISPLab: programming responsive CRISPR hybrid materials. Krishan Kumar's research group at POLYMAT / UPV-EHU.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,9 +12,23 @@
 </head>
 <body>
 
+<svg aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="polymerPattern" width="150" height="150" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+      <path d="M0 75 Q37.5 25 75 75 T150 75" fill="none" stroke="#4FE3BF" stroke-width="1.3" opacity="0.22"/>
+      <circle cx="0" cy="75" r="3" fill="#4FE3BF" opacity="0.32"/>
+      <circle cx="37.5" cy="48" r="3" fill="#5FA8E8" opacity="0.30"/>
+      <circle cx="75" cy="75" r="3" fill="#B49CF0" opacity="0.30"/>
+      <circle cx="112.5" cy="48" r="3" fill="#5FA8E8" opacity="0.30"/>
+      <circle cx="150" cy="75" r="3" fill="#4FE3BF" opacity="0.32"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#polymerPattern)"/>
+</svg>
+
 <header>
   <div class="wrap nav-inner">
-    <a class="brand" href="index.html">CRAFT<em>Lab</em></a>
+    <a class="brand" href="index.html">CRISP<em>Lab</em></a>
     <nav>
       <ul>
         <li><a href="index.html" class="active">Home</a></li>
@@ -32,9 +46,9 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <p class="kicker">Biomedical polymers · Biocompatibility &amp; hybrid materials</p>
-      <h1>Where synthetic polymers meet biological machinery.</h1>
-      <p class="lede">We design stimuli-responsive polymers and protein–polymer hybrid materials that sense their environment and act on it: releasing genes, running enzymatic cascades, and adapting to cues from living systems.</p>
+      <p class="kicker">CRISPLab · Programming responsive CRISPR hybrid materials</p>
+      <h1>Materials that sense, stabilize, and steer CRISPR.</h1>
+      <p class="lede">CRISPLab designs stimuli-responsive and hybrid materials purpose-built around CRISPR/Cas9 — from single-particle engineering and conjugation chemistry to sensing, stabilization, and delivery across biological barriers.</p>
       <div class="cta-row">
         <a class="btn solid" href="research.html">Our research</a>
         <a class="btn ghost" href="join.html">Join the lab</a>
@@ -48,28 +62,32 @@
       <div class="section-head">
         <hr class="rule">
         <h2>Research at a glance</h2>
-        <p>Five connected lines of work, unified by one question: how do we build materials that read their environment and respond with function?</p>
+        <p>Six connected lines of work, all built around one goal: programming responsive materials for CRISPR.</p>
       </div>
       <div class="glance-grid">
-        <a class="glance-card" href="research.html#protein-hybrids">
-          <h3>Protein–polymer hybrid materials</h3>
-          <p>Bioconjugation strategies bridging polymer chemistry with structural biology.</p>
-        </a>
-        <a class="glance-card" href="research.html#nanogels">
-          <h3>Stimuli-responsive nanogels</h3>
-          <p>Networks that swell, collapse, or disassemble on cue to release their cargo.</p>
-        </a>
-        <a class="glance-card" href="research.html#crispr">
+        <a class="glance-card" href="research.html#rnp-delivery">
           <h3>CRISPR / Cas9 RNP delivery</h3>
           <p>Protecting and delivering gene-editing machinery across mucosal barriers.</p>
         </a>
-        <a class="glance-card" href="research.html#nanoreactors">
-          <h3>Chemoenzymatic nanoreactors</h3>
-          <p>Enzyme-loaded nanogels running cascade reactions in confinement.</p>
+        <a class="glance-card" href="research.html#single-particle">
+          <h3>Single-particle engineering</h3>
+          <p>Controlling payload, size, and surface chemistry one particle at a time.</p>
         </a>
-        <a class="glance-card" href="research.html#theranostics">
-          <h3>Theranostics &amp; digital twins</h3>
-          <p>Physics-informed models predicting how a nanocarrier will behave.</p>
+        <a class="glance-card" href="research.html#sensing">
+          <h3>CRISPR-responsive sensing</h3>
+          <p>Materials that sense editing activity and report or trigger on it.</p>
+        </a>
+        <a class="glance-card" href="research.html#conjugation">
+          <h3>CRISPR conjugation strategies</h3>
+          <p>Site-selective chemistry linking polymers directly to Cas9 or sgRNA.</p>
+        </a>
+        <a class="glance-card" href="research.html#stabilization">
+          <h3>Small-molecule stabilization</h3>
+          <p>Additives and modifications that protect RNP activity in storage.</p>
+        </a>
+        <a class="glance-card" href="research.html#digital-twins">
+          <h3>Digital twins for CRISPR delivery</h3>
+          <p>Physics-informed models predicting nanocarrier behavior.</p>
         </a>
         <a class="glance-card glance-more" href="research.html">
           <span>All research →</span>
@@ -82,7 +100,7 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <p>CRAFTLab</p>
+    <p>CRISPLab</p>
     <div class="foot-links">
       <a href="https://scholar.google.co.in/citations?hl=en&user=G0ysXxgAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener">Scholar</a>
       <a href="https://www.linkedin.com/in/-krishan-kumar/" target="_blank" rel="noopener">LinkedIn</a>

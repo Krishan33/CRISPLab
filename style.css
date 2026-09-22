@@ -152,6 +152,7 @@ section{padding:88px 0;}
 .research-row:nth-of-type(3) .tag{border-color:var(--violet);color:var(--violet);}
 .research-row:nth-of-type(4) .tag{border-color:var(--blue);color:var(--blue);}
 .research-row:nth-of-type(5) .tag{border-color:var(--teal);color:var(--teal);}
+.research-row:nth-of-type(6) .tag{border-color:var(--violet);color:var(--violet);}
 
 /* ---- research at a glance (home page) ---- */
 .glance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
@@ -170,14 +171,29 @@ section{padding:88px 0;}
 .glance-more span{font-family:var(--serif);font-size:1.05rem;color:#0A0E0D;font-weight:600;}
 
 /* ---- people ---- */
-.people-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:14px;}
+.pi-feature{
+  display:flex;align-items:center;gap:36px;
+  background:var(--glass);border:1px solid var(--line);border-radius:22px;
+  backdrop-filter:blur(14px);
+  padding:32px;margin:0 0 20px;
+}
+@media(max-width:640px){.pi-feature{flex-direction:column;text-align:center;padding:32px 24px;}}
+.pi-photo{
+  width:220px;height:220px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--line);flex-shrink:0;
+}
+@media(max-width:640px){.pi-photo{width:180px;height:180px;}}
+.pi-info .p-name{font-size:1.5rem;margin:0 0 8px;}
+.pi-info .p-role{font-size:1rem;}
+.pi-info .p-note{font-size:0.92rem;margin-top:16px;}
+
+.people-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
 @media(max-width:860px){.people-grid{grid-template-columns:1fr;}}
 .p-card{
   padding:32px;background:var(--glass);border:1px solid var(--line);border-radius:18px;
   backdrop-filter:blur(14px);
 }
 .p-photo{width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:16px;border:1px solid var(--line);}
-.p-card:first-child .p-photo{width:120px;height:120px;}
 
 /* ---- funding & service ---- */
 .fund-grid{display:flex;flex-wrap:wrap;gap:14px;}
