@@ -19,7 +19,7 @@
   var ctx = canvas.getContext('2d');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var w, h, nodes = [];
-  var colors = ['#4FE3BF', '#5FA8E8', '#B49CF0'];
+  var colors = ['#3E6F63', '#A6512F', '#AD8A42'];
 
   function resize(){
     w = canvas.width = window.innerWidth;
@@ -54,7 +54,7 @@
         var dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 130){
           ctx.strokeStyle = a.c;
-          ctx.globalAlpha = (1 - dist / 130) * 0.16;
+          ctx.globalAlpha = (1 - dist / 130) * 0.12;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -63,7 +63,7 @@
         }
       }
     }
-    ctx.globalAlpha = 0.45;
+    ctx.globalAlpha = 0.35;
     for (var i = 0; i < nodes.length; i++){
       var n = nodes[i];
       ctx.fillStyle = n.c;
