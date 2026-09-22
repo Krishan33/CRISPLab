@@ -1,12 +1,12 @@
 :root{
-  --paper:#EFF1EC;
-  --paper-alt:#E5E8E0;
-  --ink:#182620;
-  --ink-soft:#4C5C53;
-  --teal:#3E6F63;
-  --sienna:#A6512F;
-  --gold:#AD8A42;
-  --line:#CBC7B4;
+  --paper:#E8E1D0;
+  --paper-alt:#DED5BE;
+  --ink:#221C12;
+  --ink-soft:#544B3A;
+  --teal:#2C5C51;
+  --sienna:#833E22;
+  --gold:#8C6A29;
+  --line:#C7BB9E;
   --serif: 'Fraunces', Georgia, serif;
   --sans: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -31,7 +31,7 @@ a{color:inherit;}
 /* ---- nav ---- */
 header{
   position:sticky;top:0;z-index:20;
-  background:rgba(239,241,236,0.9);
+  background:rgba(232,225,208,0.92);
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
@@ -109,6 +109,27 @@ section{padding:80px 0;}
   padding:5px 13px;background:var(--paper-alt);
 }
 
+/* ---- CRISPR/Cas9 feature figure ---- */
+.crispr-feature{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;
+  background:var(--paper-alt);border:1px solid var(--line);border-radius:4px;
+  padding:32px;margin:0 0 56px;
+}
+@media(max-width:860px){.crispr-feature{grid-template-columns:1fr;}}
+.crispr-figure{background:#fff;border:1px solid var(--line);border-radius:3px;padding:10px;}
+.crispr-figure img{width:100%;border-radius:2px;}
+.crispr-caption{font-size:0.8rem;color:var(--ink-soft);margin:10px 4px 0;font-style:italic;}
+.crispr-text h2{font-family:var(--serif);font-weight:500;font-size:1.9rem;margin:0 0 14px;color:var(--ink);letter-spacing:-0.01em;}
+.crispr-text p{color:var(--ink-soft);margin:0;max-width:52ch;}
+
+.research-subhead{
+  font-family:var(--sans);font-size:0.85rem;font-weight:700;color:var(--teal);
+  text-transform:uppercase;letter-spacing:0.1em;
+  margin:48px 0 4px;padding-top:32px;border-top:1px solid var(--line);
+}
+.research-subhead:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+.research-subhead .sub-desc{display:block;margin-top:8px;font-size:0.95rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);max-width:56ch;}
+
 .r-more{margin:0 0 18px;}
 .r-more summary{
   cursor:pointer;font-size:0.9rem;font-weight:600;color:var(--teal);
@@ -124,6 +145,9 @@ section{padding:80px 0;}
 .research-row:nth-of-type(4) .tag{border-color:var(--gold);color:var(--gold);}
 .research-row:nth-of-type(5) .tag{border-color:var(--teal);color:var(--teal);}
 .research-row:nth-of-type(6) .tag{border-color:var(--sienna);color:var(--sienna);}
+.research-row:nth-of-type(7) .tag{border-color:var(--gold);color:var(--gold);}
+.research-row:nth-of-type(8) .tag{border-color:var(--teal);color:var(--teal);}
+.research-row:nth-of-type(9) .tag{border-color:var(--sienna);color:var(--sienna);}
 
 /* ---- people ---- */
 .pi-feature{

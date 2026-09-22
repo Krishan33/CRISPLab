@@ -117,21 +117,50 @@
       <div class="section-head">
         <hr class="rule">
         <h2>Research</h2>
-        <p>Six connected lines of work, all built around one goal: programming responsive materials for CRISPR. Expand any line below for the underlying science.</p>
+        <p>Everything in the lab is built around one molecular system, approached from two directions: how we engineer around it, and where it gets applied.</p>
       </div>
 
-      <div class="research-row" id="rnp-delivery">
+      <div class="crispr-feature">
+        <div class="crispr-figure">
+          <img src="cas9-structure.png" alt="Cas9–sgRNA–DNA ternary complex structure">
+          <p class="crispr-caption">Cas9–sgRNA–DNA ternary complex, bound to the HNH and RuvC domains that drive target cleavage.</p>
+        </div>
+        <div class="crispr-text">
+          <h2>CRISPR / Cas9</h2>
+          <p>Every line of work in the lab starts from this complex: a Cas9 protein, its guide RNA, and the DNA target it binds and cleaves. Everything below is either a way of engineering materials around this system, or a disease context where getting it to work matters.</p>
+        </div>
+      </div>
+
+      <p class="research-subhead">Engineering<span class="sub-desc">Materials-level strategies for protecting, controlling, and delivering the Cas9–sgRNA complex.</span></p>
+
+      <div class="research-row" id="encapsulation">
         <div class="r-text">
-          <h3>CRISPR / Cas9 RNP delivery</h3>
-          <p>Polymeric nanocapsules that protect Cas9–sgRNA ribonucleoproteins and carry them across mucosal barriers, with a focus on transmucosal gene editing for cystic fibrosis.</p>
+          <h3>Encapsulation</h3>
+          <p>Polymeric nanocapsules that protect Cas9–sgRNA ribonucleoproteins and carry them across mucosal barriers, with a focus on transmucosal gene editing.</p>
           <details class="r-more">
             <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Ribonucleoprotein complexes are fragile — activity drops off outside a narrow window of pH, ionic strength, and shear. Encapsulating a Cas9–sgRNA RNP in a polymeric nanocapsule means protecting that complex through formulation, storage, and transport across a mucosal barrier, then releasing it intact once inside the target cell. Cystic fibrosis, where the airway mucosa is both the barrier and the target tissue, is the disease context driving most of this work.</p>
+            <p class="detail-p">Ribonucleoprotein complexes are fragile — activity drops off outside a narrow window of pH, ionic strength, and shear. Encapsulating a Cas9–sgRNA RNP in a polymeric nanocapsule means protecting that complex through formulation, storage, and transport across a mucosal barrier, then releasing it intact once inside the target cell.</p>
           </details>
           <div class="tags">
             <span class="tag">RNP encapsulation</span>
             <span class="tag">mucosal delivery</span>
             <span class="tag">gene editing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="research-row" id="conjugation">
+        <div class="r-text">
+          <h3>Conjugation strategies</h3>
+          <p>Site-selective bioconjugation that links polymers directly to Cas9 or sgRNA components, rather than encapsulating them as a black box — tuning stability, targeting, and release without disrupting activity.</p>
+          <details class="r-more">
+            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+            <p class="detail-p">Encapsulation protects an RNP but treats it as a passenger. Direct, site-selective conjugation — attaching polymer chains or small functional handles to defined positions on Cas9 or the guide RNA — offers a complementary route to control circulation time, cellular targeting, and controlled release, provided the chemistry doesn't interfere with the protein's active site or the RNA's base pairing.</p>
+          </details>
+          <div class="tags">
+            <span class="tag">site-selective chemistry</span>
+            <span class="tag">Cas9 conjugation</span>
+            <span class="tag">targeting</span>
           </div>
         </div>
       </div>
@@ -168,22 +197,6 @@
         </div>
       </div>
 
-      <div class="research-row" id="conjugation">
-        <div class="r-text">
-          <h3>CRISPR conjugation strategies</h3>
-          <p>Site-selective bioconjugation that links polymers directly to Cas9 or sgRNA components, rather than encapsulating them as a black box — tuning stability, targeting, and release without disrupting activity.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Encapsulation protects an RNP but treats it as a passenger. Direct, site-selective conjugation — attaching polymer chains or small functional handles to defined positions on Cas9 or the guide RNA — offers a complementary route to control circulation time, cellular targeting, and controlled release, provided the chemistry doesn't interfere with the protein's active site or the RNA's base pairing.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">site-selective chemistry</span>
-            <span class="tag">Cas9 conjugation</span>
-            <span class="tag">targeting</span>
-          </div>
-        </div>
-      </div>
-
       <div class="research-row" id="stabilization">
         <div class="r-text">
           <h3>Small-molecule stabilization</h3>
@@ -212,6 +225,56 @@
             <span class="tag">predictive modelling</span>
             <span class="tag">ML / digital twin</span>
             <span class="tag">formulation design</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="research-subhead">Applications<span class="sub-desc">Disease contexts where getting delivery and stability right actually matters.</span></p>
+
+      <div class="research-row" id="cystic-fibrosis">
+        <div class="r-text">
+          <h3>Cystic fibrosis</h3>
+          <p>Transmucosal CRISPR/Cas9 delivery to correct CFTR mutations at the airway epithelium, where the mucus barrier is both the obstacle and the target tissue.</p>
+          <details class="r-more">
+            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+            <p class="detail-p">Cystic fibrosis results from mutations in the CFTR gene, and the airway epithelium is uniquely difficult to reach — a thick mucus layer blocks most delivery vehicles before they reach the cells that need editing. This application area is the proving ground for the lab's mucosal RNP-delivery nanocapsules, developed in collaboration with Prof. Sarah Hedtrich's group at UBC.</p>
+          </details>
+          <div class="tags">
+            <span class="tag">CFTR</span>
+            <span class="tag">airway epithelium</span>
+            <span class="tag">mucus barrier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="research-row" id="muscular-dystrophy">
+        <div class="r-text">
+          <h3>Muscular dystrophy</h3>
+          <p>Exploring CRISPR correction of dystrophin gene mutations, where efficient delivery to muscle tissue — not just efficient editing — is the primary bottleneck.</p>
+          <details class="r-more">
+            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+            <p class="detail-p">Duchenne and related muscular dystrophies arise from mutations in the dystrophin gene. Editing efficiency in a dish is rarely the hard part; getting an RNP complex into dense, vascularized muscle tissue at scale is. This is an early-stage direction asking whether the lab's encapsulation and conjugation strategies can be adapted to muscle-specific delivery.</p>
+          </details>
+          <div class="tags">
+            <span class="tag">dystrophin</span>
+            <span class="tag">muscle delivery</span>
+            <span class="tag">early-stage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="research-row" id="anti-ageing">
+        <div class="r-text">
+          <h3>Anti-ageing</h3>
+          <p>An early-stage direction investigating CRISPR-based modulation of senescence-associated genes as a route to extending healthy cellular lifespan.</p>
+          <details class="r-more">
+            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+            <p class="detail-p">Cellular senescence — where damaged cells stop dividing but don't die, and accumulate with age — is increasingly linked to age-related decline. This is a nascent, exploratory line asking whether responsive CRISPR delivery materials could be adapted to target senescent cells specifically, rather than an established program with results yet.</p>
+          </details>
+          <div class="tags">
+            <span class="tag">senescence</span>
+            <span class="tag">longevity</span>
+            <span class="tag">exploratory</span>
           </div>
         </div>
       </div>
