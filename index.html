@@ -7,408 +7,348 @@
 <meta name="description" content="CRISPLab: programming responsive CRISPR hybrid materials. Krishan Kumar's research group at POLYMAT / UPV-EHU.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=Literata:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="bg-canvas" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
-<script>
-(function(){
-  var canvas = document.getElementById('bg-canvas');
-  var ctx = canvas.getContext('2d');
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var w, h, nodes = [];
-  var colors = ['#1C7A6E', '#493E8A', '#9C3459'];
+<nav id="nav">
+  <a class="brand" href="#top"><span class="dot"></span>CRISPLab</a>
+  <div class="navlinks">
+    <a href="#research">Research</a>
+    <a href="#people">People</a>
+    <a href="#career">Funding</a>
+    <a href="#news">News</a>
+    <a href="#join">Join</a>
+  </div>
+</nav>
 
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  function initNodes(){
-    var count = Math.min(70, Math.max(26, Math.floor((w * h) / 26000)));
-    nodes = [];
-    for (var i = 0; i < count; i++){
-      nodes.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
-        r: Math.random() * 1.5 + 1,
-        c: colors[Math.floor(Math.random() * colors.length)]
-      });
-    }
-  }
-  function frame(){
-    ctx.clearRect(0, 0, w, h);
-    for (var i = 0; i < nodes.length; i++){
-      var n = nodes[i];
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > w) n.vx *= -1;
-      if (n.y < 0 || n.y > h) n.vy *= -1;
-    }
-    for (var i = 0; i < nodes.length; i++){
-      for (var j = i + 1; j < nodes.length; j++){
-        var a = nodes[i], b = nodes[j];
-        var dx = a.x - b.x, dy = a.y - b.y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 125){
-          ctx.strokeStyle = a.c;
-          ctx.globalAlpha = (1 - dist / 125) * 0.1;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha = 0.3;
-    for (var i = 0; i < nodes.length; i++){
-      var n = nodes[i];
-      ctx.fillStyle = n.c;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    if (!reduceMotion) requestAnimationFrame(frame);
-  }
-
-  window.addEventListener('resize', function(){ resize(); initNodes(); });
-  resize();
-  initNodes();
-  frame();
-})();
-</script>
-
-<style>
-  .repeat-mark{display:inline-flex;align-items:flex-end;gap:2.5px;height:18px;margin-right:9px;vertical-align:-3px;}
-  .repeat-mark span{display:block;width:3px;background:var(--teal);border-radius:1px;transform:scaleY(0);transform-origin:bottom;animation:bar-rise .5s cubic-bezier(.2,.8,.3,1) forwards;}
-  .repeat-mark span:nth-child(1){height:8px;animation-delay:.05s;}
-  .repeat-mark span:nth-child(2){height:16px;animation-delay:.15s;background:var(--indigo);}
-  .repeat-mark span:nth-child(3){height:11px;animation-delay:.25s;}
-  .repeat-mark span:nth-child(4){height:18px;animation-delay:.35s;background:var(--rose);}
-  .repeat-mark span:nth-child(5){height:6px;animation-delay:.45s;}
-  @keyframes bar-rise{to{transform:scaleY(1);}}
-  @media (prefers-reduced-motion: reduce){
-    .repeat-mark span{animation:none;transform:scaleY(1);}
-  }
-</style>
-
-<header>
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top"><span class="repeat-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>CRISPLab</a>
-    <nav>
-      <ul>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#people">People</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#join">Join</a></li>
-      </ul>
-    </nav>
+<header class="hero" id="top">
+  <canvas id="mesh"></canvas>
+  <div class="wrap">
+    <div class="hero-eyebrow label">CRISPR / Cas9 &nbsp;·&nbsp; Responsive hybrid materials</div>
+    <h1>Materials that sense, stabilize, and <em>steer</em> CRISPR.</h1>
+    <p class="lede">CRISPLab designs stimuli-responsive and hybrid materials built around one molecular system — the Cas9–sgRNA–DNA complex — from single-particle engineering and conjugation chemistry to delivery across biological barriers.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#research">Our research</a>
+      <a class="btn ghost" href="#join">Join the lab</a>
+    </div>
   </div>
 </header>
 
-<main id="top">
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">01</span><h2>Research</h2></div>
+    <p class="sec-sub reveal">Everything below is built around one complex, approached from two directions: how we engineer around it, and where it gets applied.</p>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-text">
-        <h1>Materials that sense, stabilize, and steer CRISPR.</h1>
-        <p class="lede">CRISPLab designs stimuli-responsive and hybrid materials built around one molecular system — the Cas9–sgRNA–DNA complex shown here — from single-particle engineering and conjugation chemistry to sensing, stabilization, and delivery across biological barriers.</p>
-        <div class="cta-row">
-          <a class="btn solid" href="#research">Our research</a>
-          <a class="btn ghost" href="#join">Join the lab</a>
-        </div>
-      </div>
-      <div class="hero-figure">
-        <div class="specimen-plate">
-          <img src="cas9-structure.png" alt="Cas9–sgRNA–DNA ternary complex structure">
-        </div>
-        <p class="crispr-caption">Cas9–sgRNA–DNA ternary complex, bound to the HNH and RuvC domains that drive target cleavage.</p>
-      </div>
-    </div>
-  </section>
+    <figure class="figure reveal">
+      <img src="cas9-structure.png" alt="Cas9–sgRNA–DNA ternary complex structure">
+      <figcaption>Cas9–sgRNA–DNA ternary complex, bound to the HNH and RuvC domains that drive target cleavage.</figcaption>
+    </figure>
 
-  <!-- RESEARCH -->
-  <section id="research">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Research</h2>
-        <p>Everything in the lab is built around that one complex, approached from two directions: how we engineer around it, and where it gets applied.</p>
+    <div class="group-label reveal">Engineering</div>
+    <p class="group-desc reveal">Materials-level strategies for protecting, controlling, and delivering the Cas9–sgRNA complex.</p>
+    <div class="research-grid">
+
+      <div class="rcard reveal">
+        <div class="rnum">— protect</div>
+        <h3>Encapsulation</h3>
+        <p>Polymeric nanocapsules that protect Cas9–sgRNA ribonucleoproteins and carry them across mucosal barriers, with a focus on transmucosal gene editing.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Ribonucleoprotein complexes are fragile — activity drops off outside a narrow window of pH, ionic strength, and shear. Encapsulating a Cas9–sgRNA RNP in a polymeric nanocapsule means protecting that complex through formulation, storage, and transport across a mucosal barrier, then releasing it intact once inside the target cell.</p>
+        </details>
+        <div class="tags"><span class="tag">RNP encapsulation</span><span class="tag">mucosal delivery</span><span class="tag">gene editing</span></div>
       </div>
 
-      <p class="research-subhead">Engineering<span class="sub-desc">Materials-level strategies for protecting, controlling, and delivering the Cas9–sgRNA complex.</span></p>
-
-      <div class="research-row" id="encapsulation">
-        <div class="r-text">
-          <h3>Encapsulation</h3>
-          <p>Polymeric nanocapsules that protect Cas9–sgRNA ribonucleoproteins and carry them across mucosal barriers, with a focus on transmucosal gene editing.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Ribonucleoprotein complexes are fragile — activity drops off outside a narrow window of pH, ionic strength, and shear. Encapsulating a Cas9–sgRNA RNP in a polymeric nanocapsule means protecting that complex through formulation, storage, and transport across a mucosal barrier, then releasing it intact once inside the target cell.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">RNP encapsulation</span>
-            <span class="tag">mucosal delivery</span>
-            <span class="tag">gene editing</span>
-          </div>
-        </div>
+      <div class="rcard reveal">
+        <div class="rnum">— attach</div>
+        <h3>Conjugation strategies</h3>
+        <p>Site-selective bioconjugation that links polymers directly to Cas9 or sgRNA components, rather than encapsulating them as a black box — tuning stability, targeting, and release without disrupting activity.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Encapsulation protects an RNP but treats it as a passenger. Direct, site-selective conjugation — attaching polymer chains or small functional handles to defined positions on Cas9 or the guide RNA — offers a complementary route to control circulation time, cellular targeting, and controlled release, provided the chemistry doesn't interfere with the protein's active site or the RNA's base pairing.</p>
+        </details>
+        <div class="tags"><span class="tag">site-selective chemistry</span><span class="tag">Cas9 conjugation</span><span class="tag">targeting</span></div>
       </div>
 
-      <div class="research-row" id="conjugation">
-        <div class="r-text">
-          <h3>Conjugation strategies</h3>
-          <p>Site-selective bioconjugation that links polymers directly to Cas9 or sgRNA components, rather than encapsulating them as a black box — tuning stability, targeting, and release without disrupting activity.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Encapsulation protects an RNP but treats it as a passenger. Direct, site-selective conjugation — attaching polymer chains or small functional handles to defined positions on Cas9 or the guide RNA — offers a complementary route to control circulation time, cellular targeting, and controlled release, provided the chemistry doesn't interfere with the protein's active site or the RNA's base pairing.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">site-selective chemistry</span>
-            <span class="tag">Cas9 conjugation</span>
-            <span class="tag">targeting</span>
-          </div>
-        </div>
+      <div class="rcard reveal">
+        <div class="rnum">— resolve</div>
+        <h3>Single-particle engineering</h3>
+        <p>Moving beyond bulk formulation to engineer and characterize CRISPR nanocarriers one particle at a time — controlling payload number, size, and surface chemistry with a precision ensemble methods can't resolve.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Most nanoparticle formulations are reported as population averages, which hides real particle-to-particle heterogeneity in RNP loading, surface density, and release behavior. This line explores single-particle synthesis and characterization techniques to control and verify those properties directly.</p>
+        </details>
+        <div class="tags"><span class="tag">single-particle synthesis</span><span class="tag">payload control</span><span class="tag">batch consistency</span></div>
       </div>
 
-      <div class="research-row" id="single-particle">
-        <div class="r-text">
-          <h3>Single-particle engineering</h3>
-          <p>Moving beyond bulk formulation to engineer and characterize CRISPR nanocarriers one particle at a time — controlling payload number, size, and surface chemistry with a precision ensemble methods can't resolve.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Most nanoparticle formulations are reported as population averages, which hides real particle-to-particle heterogeneity in RNP loading, surface density, and release behavior. This line explores single-particle synthesis and characterization techniques to control and verify those properties directly — aiming for tighter batch-to-batch consistency and a clearer picture of which particle-level properties actually predict delivery efficiency.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">single-particle synthesis</span>
-            <span class="tag">payload control</span>
-            <span class="tag">batch consistency</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="research-row" id="digital-twins">
-        <div class="r-text">
-          <h3>Digital twins for CRISPR delivery</h3>
-          <p>Physics-informed models that predict how a CRISPR nanocarrier's design choices — size, charge, surface chemistry — translate into delivery efficiency, before a single batch is synthesized.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Screening every combination of formulation parameters by trial and error is slow and expensive. This line builds predictive models trained on single-particle and bulk delivery data to shortcut that search, developed in parallel with Akshar Innovations, an AI-driven nanocarrier prediction venture — closing the loop between formulation design and prediction.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">predictive modelling</span>
-            <span class="tag">ML / digital twin</span>
-            <span class="tag">formulation design</span>
-          </div>
-        </div>
-      </div>
-
-      <p class="research-subhead">Applications<span class="sub-desc">Disease contexts where getting delivery and stability right actually matters.</span></p>
-
-      <div class="research-row" id="cystic-fibrosis">
-        <div class="r-text">
-          <h3>Cystic fibrosis</h3>
-          <p>Transmucosal CRISPR/Cas9 delivery to correct CFTR mutations at the airway epithelium, where the mucus barrier is both the obstacle and the target tissue.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Cystic fibrosis results from mutations in the CFTR gene, and the airway epithelium is uniquely difficult to reach — a thick mucus layer blocks most delivery vehicles before they reach the cells that need editing. This application area is the proving ground for the lab's mucosal RNP-delivery nanocapsules, developed in collaboration with Prof. Sarah Hedtrich's group at UBC.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">CFTR</span>
-            <span class="tag">airway epithelium</span>
-            <span class="tag">mucus barrier</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="research-row" id="muscular-dystrophy">
-        <div class="r-text">
-          <h3>Muscular dystrophy</h3>
-          <p>Exploring CRISPR correction of dystrophin gene mutations, where efficient delivery to muscle tissue — not just efficient editing — is the primary bottleneck.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Duchenne and related muscular dystrophies arise from mutations in the dystrophin gene. Editing efficiency in a dish is rarely the hard part; getting an RNP complex into dense, vascularized muscle tissue at scale is. This is an early-stage direction asking whether the lab's encapsulation and conjugation strategies can be adapted to muscle-specific delivery.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">dystrophin</span>
-            <span class="tag">muscle delivery</span>
-            <span class="tag">early-stage</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="research-row" id="anti-ageing">
-        <div class="r-text">
-          <h3>Anti-ageing</h3>
-          <p>An early-stage direction investigating CRISPR-based modulation of senescence-associated genes as a route to extending healthy cellular lifespan.</p>
-          <details class="r-more">
-            <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
-            <p class="detail-p">Cellular senescence — where damaged cells stop dividing but don't die, and accumulate with age — is increasingly linked to age-related decline. This is a nascent, exploratory line asking whether responsive CRISPR delivery materials could be adapted to target senescent cells specifically, rather than an established program with results yet.</p>
-          </details>
-          <div class="tags">
-            <span class="tag">senescence</span>
-            <span class="tag">longevity</span>
-            <span class="tag">exploratory</span>
-          </div>
-        </div>
+      <div class="rcard reveal">
+        <div class="rnum">— predict</div>
+        <h3>Digital twins for CRISPR delivery</h3>
+        <p>Physics-informed models that predict how a CRISPR nanocarrier's design choices — size, charge, surface chemistry — translate into delivery efficiency, before a single batch is synthesized.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Screening every combination of formulation parameters by trial and error is slow and expensive. This line builds predictive models trained on single-particle and bulk delivery data to shortcut that search, developed in parallel with Akshar Innovations, an AI-driven nanocarrier prediction venture.</p>
+        </details>
+        <div class="tags"><span class="tag">predictive modelling</span><span class="tag">ML / digital twin</span><span class="tag">formulation design</span></div>
       </div>
 
     </div>
-  </section>
 
-  <!-- PEOPLE -->
-  <section id="people">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>People</h2>
-        <p>A small group working at the interface of polymer chemistry, CRISPR biology, and data.</p>
+    <div class="group-label reveal">Applications</div>
+    <p class="group-desc reveal">Disease contexts where getting delivery and stability right actually matters.</p>
+    <div class="research-grid">
+
+      <div class="rcard reveal">
+        <div class="rnum">— target</div>
+        <h3>Cystic fibrosis</h3>
+        <p>Transmucosal CRISPR/Cas9 delivery to correct CFTR mutations at the airway epithelium, where the mucus barrier is both the obstacle and the target tissue.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Cystic fibrosis results from mutations in the CFTR gene, and the airway epithelium is uniquely difficult to reach. This application area is the proving ground for the lab's mucosal RNP-delivery nanocapsules, developed in collaboration with Prof. Sarah Hedtrich's group at UBC.</p>
+        </details>
+        <div class="tags"><span class="tag">CFTR</span><span class="tag">airway epithelium</span><span class="tag">mucus barrier</span></div>
       </div>
 
-      <div class="pi-feature">
-        <img class="pi-photo" src="krishan.jpg" alt="Krishan Kumar">
-        <div class="pi-info">
-          <p class="p-name">Dr. Krishan Kumar</p>
-          <p class="p-role">Principal Investigator</p>
-          <p class="p-role">Ramón y Cajal Fellow</p>
-          <p class="p-note">Incoming host: University of Valladolid</p>
-        </div>
+      <div class="rcard reveal">
+        <div class="rnum">— reach</div>
+        <h3>Muscular dystrophy</h3>
+        <p>Exploring CRISPR correction of dystrophin gene mutations, where efficient delivery to muscle tissue — not just efficient editing — is the primary bottleneck.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Duchenne and related muscular dystrophies arise from mutations in the dystrophin gene. Editing efficiency in a dish is rarely the hard part; getting an RNP complex into dense, vascularized muscle tissue at scale is. This is an early-stage direction.</p>
+        </details>
+        <div class="tags"><span class="tag">dystrophin</span><span class="tag">muscle delivery</span><span class="tag">early-stage</span></div>
       </div>
 
-      <div class="people-grid">
-        <div class="p-card p-open">
-          <p class="p-name">Open position</p>
-          <p class="p-role">PhD Student</p>
+      <div class="rcard reveal">
+        <div class="rnum">— extend</div>
+        <h3>Anti-ageing</h3>
+        <p>An early-stage direction investigating CRISPR-based modulation of senescence-associated genes as a route to extending healthy cellular lifespan.</p>
+        <details class="r-more">
+          <summary><span class="more-label">Read more +</span><span class="less-label">Read less –</span></summary>
+          <p class="detail-p">Cellular senescence — where damaged cells stop dividing but don't die — is increasingly linked to age-related decline. This is a nascent, exploratory line, not an established program with results yet.</p>
+        </details>
+        <div class="tags"><span class="tag">senescence</span><span class="tag">longevity</span><span class="tag">exploratory</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">02</span><h2>People</h2></div>
+    <p class="sec-sub reveal">A small group working at the interface of polymer chemistry, CRISPR biology, and data.</p>
+    <div class="people-grid">
+      <div class="person reveal">
+        <div class="avatar lead"><img src="krishan.jpg" alt="Krishan Kumar" onerror="this.remove();this.parentElement.textContent='KK'"></div>
+        <h4>Dr. Krishan Kumar</h4>
+        <div class="role">Principal Investigator · Ramón y Cajal Fellow</div>
+        <div class="note">Incoming host: University of Valladolid</div>
+      </div>
+      <div class="person reveal">
+        <div class="avatar empty">—</div>
+        <h4>Open position</h4>
+        <div class="role">PhD Student</div>
+      </div>
+      <div class="person reveal">
+        <div class="avatar empty">—</div>
+        <h4>Open position</h4>
+        <div class="role">Postdoctoral Researcher</div>
+      </div>
+      <div class="person reveal">
+        <div class="avatar empty">—</div>
+        <h4>Open position</h4>
+        <div class="role">MSc / Visiting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING & SERVICE -->
+<section id="career">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">03</span><h2>Funding &amp; service</h2></div>
+
+    <div class="group-label reveal">Fellowships</div>
+    <p class="group-desc reveal">The fellowship path that built the lab.</p>
+    <div class="fund-list reveal">
+      <div class="fund-item"><div class="f-org">DST-SERB</div><div class="f-role">India</div></div>
+      <div class="fund-item"><div class="f-org">CSIR</div><div class="f-role">India</div></div>
+      <div class="fund-item"><div class="f-org">NRF Korea</div><div class="f-role">National Research Foundation</div></div>
+      <div class="fund-item"><div class="f-org">Juan de la Cierva</div><div class="f-role">AEI, Spain</div></div>
+      <div class="fund-item"><div class="f-org">MSCA-COFUND</div><div class="f-role">ADAGIO, EU</div></div>
+      <div class="fund-item"><div class="f-org">MSCA-IF</div><div class="f-role">EU</div></div>
+      <div class="fund-item"><div class="f-org">Ramón y Cajal</div><div class="f-role">AEI, Spain — current</div></div>
+    </div>
+
+    <div class="group-label reveal">Editorial</div>
+    <p class="group-desc reveal">Journal roles and peer review.</p>
+    <div class="reveal">
+      <div class="service">
+        <div class="pnum">[01]</div>
+        <div><h4>Associate Editor, Frontiers in Drug Delivery</h4><div class="meta">Frontiers</div></div>
+      </div>
+      <div class="service">
+        <div class="pnum">[02]</div>
+        <div>
+          <h4>Guest Editor — Frontiers in Biomaterials Science</h4>
+          <div class="meta">"Polymeric Contrast Agents for In Vivo Imaging." Krishan Kumar, Alberto Escudero, Nery M. Aguilar — <a href="https://www.frontiersin.org/research-topics/83383/polymeric-contrast-agents-for-invivo-imaging-from-molecular-design-to-multimodal-translation" target="_blank" rel="noopener">special issue</a></div>
         </div>
-        <div class="p-card p-open">
-          <p class="p-name">Open position</p>
-          <p class="p-role">Postdoctoral Researcher</p>
-        </div>
-        <div class="p-card p-open">
-          <p class="p-name">Open position</p>
-          <p class="p-role">MSc / Visiting</p>
+      </div>
+      <div class="service">
+        <div class="pnum">[03]</div>
+        <div>
+          <h4>Guest Editor — Journal of Functional Biomaterials, MDPI</h4>
+          <div class="meta">"Current Development of Polymeric Biomaterials for Biomedical Applications." Krishan Kumar — <a href="https://www.mdpi.com/journal/jfb/special_issues/MH922484J2" target="_blank" rel="noopener">special issue</a></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FUNDING & FELLOWSHIPS -->
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Funding &amp; fellowships</h2>
-        <p>The fellowship path that built the lab.</p>
-      </div>
-      <div class="fund-list">
-        <div class="fund-item"><p class="f-org">DST-SERB</p><p class="f-role">India</p></div>
-        <div class="fund-item"><p class="f-org">CSIR</p><p class="f-role">India</p></div>
-        <div class="fund-item"><p class="f-org">NRF Korea</p><p class="f-role">National Research Foundation</p></div>
-        <div class="fund-item"><p class="f-org">Juan de la Cierva</p><p class="f-role">AEI, Spain</p></div>
-        <div class="fund-item"><p class="f-org">MSCA-COFUND</p><p class="f-role">ADAGIO, EU</p></div>
-        <div class="fund-item"><p class="f-org">MSCA-IF</p><p class="f-role">EU</p></div>
-        <div class="fund-item"><p class="f-org">Ramón y Cajal</p><p class="f-role">AEI, Spain — current</p></div>
+<!-- NEWS -->
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">04</span><h2>News</h2></div>
+    <div class="reveal">
+      <div class="news-item"><div class="date">2026</div><p>Lab established with the award of a <b>Ramón y Cajal</b> fellowship. Now recruiting at all levels.</p></div>
+      <div class="news-item"><div class="date">2025</div><p>Visiting Postdoctoral Researcher, Health Sciences Mall, University of British Columbia, Vancouver, Canada. Supervisor: Prof. Sarah Hedtrich, Tier I Canada Research Chair in Human Disease Models.</p></div>
+      <div class="news-item"><div class="date">2025</div><p>Visiting researcher, Pediatric Neurooncology (B062), Hopp Children's Cancer Center Heidelberg (KiTZ) and German Cancer Research Center (DKFZ), Heidelberg, Germany. Supervisor: Dr. Marc Zuckermann, Group Leader, "Preclinical Modelling."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" class="join">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">05</span><h2>Join us</h2></div>
+    <p class="big reveal">We're looking for curious chemists, engineers, and biologists who want to build materials that do something. PhD, postdoc, and visiting positions are open.</p>
+    <div class="contact reveal">
+      <div class="blk"><div class="label">Email</div><a href="mailto:ks90859@gmail.com">ks90859@gmail.com</a></div>
+      <div class="blk"><div class="label">Location</div><span>Spain</span></div>
+      <div class="blk"><div class="label">Find us</div>
+        <a href="https://scholar.google.co.in/citations?hl=en&amp;user=G0ysXxgAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://www.linkedin.com/in/-krishan-kumar/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/krishansheora14" target="_blank" rel="noopener">X / Twitter</a>
       </div>
     </div>
-  </section>
-
-  <!-- EDITORIAL & SERVICE -->
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Editorial &amp; service</h2>
-      </div>
-      <div class="service-list">
-        <div class="service-item">
-          <h3>Associate Editor, Frontiers in Drug Delivery</h3>
-          <p>Frontiers</p>
-        </div>
-        <div class="service-item">
-          <h3>Guest Editor — Frontiers in Biomaterials Science</h3>
-          <p>"Polymeric Contrast Agents for In Vivo Imaging: From Molecular Design to Multimodal Translation." Guest Editors: Krishan Kumar, Alberto Escudero, Nery M. Aguilar. <a href="https://www.frontiersin.org/research-topics/83383/polymeric-contrast-agents-for-invivo-imaging-from-molecular-design-to-multimodal-translation" target="_blank" rel="noopener">View special issue</a></p>
-        </div>
-        <div class="service-item">
-          <h3>Guest Editor — Journal of Functional Biomaterials, MDPI</h3>
-          <p>"Current Development of Polymeric Biomaterials for Biomedical Applications." Guest Editor: Krishan Kumar. <a href="https://www.mdpi.com/journal/jfb/special_issues/MH922484J2" target="_blank" rel="noopener">View special issue</a></p>
-        </div>
-      </div>
+    <div class="positions-list reveal">
+      <div class="position-item"><div><h3>PhD Student</h3><p>Single-particle engineering, CRISPR conjugation chemistry, or RNP stabilization.</p></div><a class="btn" href="mailto:ks90859@gmail.com">Apply</a></div>
+      <div class="position-item"><div><h3>Postdoctoral Researcher</h3><p>CRISPR/Cas9 RNP delivery, single-particle engineering, or digital-twin modelling.</p></div><a class="btn" href="mailto:ks90859@gmail.com">Apply</a></div>
+      <div class="position-item"><div><h3>MSc / Visiting Researcher</h3><p>Short-term projects across any of the lab's active research lines.</p></div><a class="btn" href="mailto:ks90859@gmail.com">Apply</a></div>
     </div>
-  </section>
-
-  <!-- NEWS -->
-  <section id="news">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>News</h2>
-      </div>
-      <div class="news-list">
-        <div class="news-item">
-          <span class="news-year">2026</span>
-          <p>Lab established with the award of a Ramón y Cajal fellowship. Now recruiting at all levels.</p>
-        </div>
-        <div class="news-item">
-          <span class="news-year">2025</span>
-          <p>Visiting Postdoctoral Researcher, Health Sciences Mall, University of British Columbia, Vancouver, Canada. Supervisor: Prof. Sarah Hedtrich, Tier I Canada Research Chair in Human Disease Models.</p>
-        </div>
-        <div class="news-item">
-          <span class="news-year">2025</span>
-          <p>Visiting researcher, Pediatric Neurooncology (B062), Hopp Children's Cancer Center Heidelberg (KiTZ) and German Cancer Research Center (DKFZ), Heidelberg, Germany. Supervisor: Dr. Marc Zuckermann, Group Leader, "Preclinical Modelling."</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- JOIN -->
-  <section id="join">
-    <div class="wrap">
-      <div class="join-head">
-        <h2>Join us</h2>
-        <p>We're looking for curious chemists, engineers, and biologists who want to build materials that do something. PhD, postdoc, and visiting positions are open.</p>
-        <div class="join-meta">
-          <a class="btn solid" href="mailto:ks90859@gmail.com">Get in touch</a>
-          <span class="join-email">ks90859@gmail.com · Spain</span>
-        </div>
-      </div>
-
-      <div class="positions-list">
-        <div class="position-item">
-          <div>
-            <h3>PhD Student</h3>
-            <p>Single-particle engineering, CRISPR conjugation chemistry, or RNP stabilization.</p>
-          </div>
-          <a class="btn ghost" href="mailto:ks90859@gmail.com">Apply</a>
-        </div>
-        <div class="position-item">
-          <div>
-            <h3>Postdoctoral Researcher</h3>
-            <p>CRISPR/Cas9 RNP delivery, single-particle engineering, or CRISPR-responsive sensing and stabilization.</p>
-          </div>
-          <a class="btn ghost" href="mailto:ks90859@gmail.com">Apply</a>
-        </div>
-        <div class="position-item">
-          <div>
-            <h3>MSc / Visiting Researcher</h3>
-            <p>Short-term projects across any of the lab's active research lines.</p>
-          </div>
-          <a class="btn ghost" href="mailto:ks90859@gmail.com">Apply</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <footer>
-  <div class="wrap foot-inner">
-    <p>CRISPLab</p>
-    <div class="foot-links">
-      <a href="https://scholar.google.co.in/citations?hl=en&user=G0ysXxgAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener">Scholar</a>
-      <a href="https://www.linkedin.com/in/-krishan-kumar/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://x.com/krishansheora14" target="_blank" rel="noopener">X / Twitter</a>
-    </div>
+  <div class="wrap">
+    <span class="label">© <span id="yr"></span> CRISPLab</span>
+    <span class="label">Krishan Kumar · POLYMAT / UPV-EHU</span>
   </div>
 </footer>
 
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+const io = new IntersectionObserver((es) => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Breathing polymer network: crosslinked nodes that ripple
+   emerald -> coral on a stimulus, then relax back. Scoped to
+   the hero canvas only. */
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv = document.getElementById('mesh'), ctx = cv.getContext('2d');
+  let W,H,dpr,nodes=[],links=[];
+  const SWELL=[27,110,94], TRIG=[255,107,74];
+
+  function size(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    build();
+  }
+  function build(){
+    const target=Math.round((W*H)/17000);
+    const n=Math.max(24,Math.min(100,target));
+    nodes=[];
+    for(let i=0;i<n;i++){
+      nodes.push({x:Math.random()*W,y:Math.random()*H,ph:Math.random()*Math.PI*2,charge:0});
+    }
+    links=[];
+    const R=Math.min(W,H)*0.18;
+    for(let i=0;i<nodes.length;i++)
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+        if(dx*dx+dy*dy < R*R) links.push([i,j]);
+      }
+  }
+  function mix(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+  function rgb(c,al){return `rgba(${c[0]|0},${c[1]|0},${c[2]|0},${al})`;}
+
+  function stimulus(px,py){
+    nodes.forEach(nd=>{ nd._td = Math.hypot(nd.x-px,nd.y-py); });
+    nodes.forEach(nd=>{ setTimeout(()=>{ nd.charge=Math.min(1,nd.charge+0.9); }, nd._td*1.6); });
+  }
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    nodes.forEach(nd=>{
+      nd.ph+=0.012;
+      const amp=5+nd.charge*9;
+      nd.dx=Math.cos(nd.ph)*amp;
+      nd.dy=Math.sin(nd.ph*1.1)*amp;
+      nd.charge*=0.972;
+    });
+    links.forEach(([i,j])=>{
+      const a=nodes[i],b=nodes[j];
+      const ax=a.x+a.dx,ay=a.y+a.dy,bx=b.x+b.dx,by=b.y+b.dy;
+      const ch=(a.charge+b.charge)/2;
+      ctx.strokeStyle=rgb(mix(SWELL,TRIG,ch), 0.05+ch*0.2);
+      ctx.lineWidth=0.8+ch*1.1;
+      ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();
+    });
+    nodes.forEach(nd=>{
+      const r=1.5+nd.charge*2.6;
+      ctx.fillStyle=rgb(mix(SWELL,TRIG,nd.charge), 0.16+nd.charge*0.5);
+      ctx.beginPath();ctx.arc(nd.x+nd.dx,nd.y+nd.dy,r,0,7);ctx.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+
+  function start(){
+    size();
+    if(reduce){
+      links.forEach(([i,j])=>{const a=nodes[i],b=nodes[j];
+        ctx.strokeStyle=rgb(SWELL,0.08);ctx.lineWidth=0.8;
+        ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();});
+      nodes.forEach(nd=>{ctx.fillStyle=rgb(SWELL,0.22);
+        ctx.beginPath();ctx.arc(nd.x,nd.y,1.6,0,7);ctx.fill();});
+      return;
+    }
+    frame();
+    setInterval(()=>stimulus(Math.random()*W, Math.random()*H*0.6), 5200);
+    setTimeout(()=>stimulus(W*0.5,H*0.4), 1200);
+    let last=0;
+    cv.parentElement.addEventListener('pointermove',e=>{
+      const now=performance.now(); if(now-last<700)return; last=now;
+      const r=cv.getBoundingClientRect();
+      stimulus(e.clientX-r.left, e.clientY-r.top);
+    });
+  }
+  addEventListener('resize',()=>{clearTimeout(window._rz);window._rz=setTimeout(size,200);});
+  start();
+})();
+</script>
 </body>
 </html>
