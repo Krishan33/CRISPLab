@@ -129,11 +129,25 @@ section{padding:72px 0;}
 @media(max-width:900px){.people-grid{grid-template-columns:repeat(2,1fr);}}
 
 /* ---- FUNDING & SERVICE ---- */
-.fund-list{display:flex;flex-wrap:wrap;gap:0;margin-bottom:8px;}
-.fund-item{padding:6px 22px;border-left:1px solid var(--mist);}
+.fund-list{display:flex;flex-wrap:wrap;gap:14px 0;margin-bottom:8px;}
+.fund-item{padding:4px 22px;border-left:1px solid var(--mist);}
 .fund-item:first-child{border-left:none;padding-left:0;}
 .fund-item .f-org{font-family:var(--display);font-weight:600;font-size:15px;}
 .fund-item .f-role{font-family:var(--mono);font-size:11px;color:var(--mist-ink);margin-top:2px;letter-spacing:.02em;}
+
+.logo-wall{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:34px 48px;margin:40px 0 56px;padding:34px 0;
+  border-top:1px solid var(--mist);border-bottom:1px solid var(--mist);
+}
+.logo-wall img{height:64px;width:auto;max-width:100%;object-fit:contain;transition:transform .3s ease;}
+.logo-wall img.lw-banner{height:52px;}
+.logo-wall img:hover{transform:translateY(-3px);}
+@media(max-width:640px){
+  .logo-wall{gap:24px 30px;}
+  .logo-wall img{height:48px;}
+  .logo-wall img.lw-banner{height:auto;width:100%;}
+}
 
 .service{display:grid;grid-template-columns:54px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--mist);}
 .service:last-child{border-bottom:1px solid var(--mist);}
