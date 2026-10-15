@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Krishan Kumar · Polymer Nanomedicine</title>
+<meta name="description" content="Researcher in polymer nanomedicine. Stimuli-responsive nanocarriers for CRISPR delivery. Ramón y Cajal Fellow, Universidad de Valladolid.">
+<meta name="theme-color" content="#F4F6F3">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="apple-touch-icon" href="brand/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E2A2B;
+  --paper:#F4F6F3;
+  --swell:#1B6E5E;
+  --trigger:#FF6B4A;
+  --mist:#C3D2CB;
+  --mist-ink:#5C726B;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Newsreader",Georgia,serif;
+  --mono:"Space Mono",ui-monospace,monospace;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+@media(max-width:640px){.wrap{padding:0 20px;}}
+:focus-visible{outline:2.5px solid var(--trigger);outline-offset:3px;}
+.skip{position:absolute;left:-9999px;}
+.skip:focus{left:16px;top:16px;background:var(--ink);color:var(--paper);padding:10px 16px;z-index:99;}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-ink);}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;background:rgba(244,246,243,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;transition:border-color .3s;}
+nav.scrolled{border-bottom:1px solid var(--mist);}
+.brand{font-family:var(--display);font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px;}
+.brand .mark{width:24px;height:24px;flex-shrink:0;transition:transform .4s;}
+.brand:hover .mark{transform:rotate(-12deg) scale(1.08);}
+.brand small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--mist-ink);letter-spacing:.04em;}
+@media(max-width:620px){.brand small{display:none;}}
+.navlinks{display:flex;gap:26px;font-family:var(--mono);font-size:13px;}
+.navlinks a{position:relative;padding:4px 0;color:var(--mist-ink);transition:color .25s;}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--trigger);transition:width .25s;}
+.navlinks a:hover{color:var(--ink);}
+.navlinks a:hover::after{width:100%;}
+@media(max-width:860px){.navlinks{display:none;}}
+
+/* HERO */
+.hero{padding:72px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1fr 330px;gap:52px;align-items:center;}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:36px;}}
+.now{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;
+  letter-spacing:.08em;color:var(--swell);border:1px solid var(--mist);border-radius:100px;padding:6px 14px;margin-bottom:26px;}
+.now .pulse{width:7px;height:7px;border-radius:50%;background:var(--trigger);animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(1.35);}}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,58px);line-height:1.05;letter-spacing:-.02em;max-width:17ch;}
+.hero h1 em{font-family:var(--body);font-style:italic;font-weight:400;color:var(--swell);}
+.hero p.lede{margin-top:22px;max-width:52ch;font-size:clamp(17px,1.7vw,19px);}
+.hero-cta{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap;}
+.btn{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  padding:13px 22px;border:1.5px solid var(--ink);border-radius:2px;transition:background .25s,color .25s,border-color .25s;}
+.btn.primary{background:var(--ink);color:var(--paper);}
+.btn.primary:hover{background:var(--trigger);border-color:var(--trigger);}
+.btn.ghost:hover{background:var(--ink);color:var(--paper);}
+.portrait{position:relative;}
+.portrait::before{content:"";position:absolute;left:50%;top:4%;transform:translateX(-50%);
+  width:96%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 45%, rgba(27,110,94,.20), rgba(27,110,94,.07) 58%, rgba(27,110,94,0) 72%);}
+.portrait img,.portrait canvas{position:relative;width:100%;display:block;}
+.portrait canvas{image-rendering:pixelated;}
+@media(max-width:900px){.portrait{max-width:300px;}}
+
+/* TRACK RECORD */
+.track{padding:34px 0;border-top:1px solid var(--mist);border-bottom:1px solid var(--mist);}
+.track .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;}
+.track .label{flex-shrink:0;}
+.track ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;}
+.track li{font-family:var(--display);font-weight:500;font-size:14.5px;color:var(--mist-ink);}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--mist);
+  border:1px solid var(--mist);margin:0;}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr);}}
+.metric{background:var(--paper);padding:30px 26px;}
+.metric .n{font-family:var(--display);font-weight:700;font-size:clamp(30px,4vw,42px);letter-spacing:-.02em;line-height:1;}
+.metric .n span{color:var(--trigger);}
+.metric .d{font-family:var(--mono);font-size:11.5px;color:var(--mist-ink);margin-top:10px;letter-spacing:.03em;line-height:1.5;}
+
+/* SECTIONS */
+section{padding:76px 0;}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;}
+.sec-head .idx{font-family:var(--mono);font-size:13px;color:var(--trigger);}
+.sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(25px,3.4vw,36px);letter-spacing:-.02em;}
+.sec-sub{color:var(--mist-ink);max-width:56ch;margin-bottom:40px;}
+
+/* WORK */
+.work-list{border-top:1px solid var(--mist);}
+.work-item{display:grid;grid-template-columns:52px 1fr;gap:22px;align-items:baseline;
+  padding:26px 0;border-bottom:1px solid var(--mist);transition:padding-left .3s;}
+.work-item:hover{padding-left:10px;}
+.work-item .wn{font-family:var(--mono);font-size:13px;color:var(--mist-ink);}
+.work-item h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em;}
+.work-item p{font-size:16px;color:#27433f;margin-top:7px;max-width:62ch;}
+.work-item .tags{margin-top:13px;display:flex;gap:7px;flex-wrap:wrap;}
+.tag{font-family:var(--mono);font-size:11px;color:var(--mist-ink);border:1px solid var(--mist);padding:3px 9px;border-radius:2px;}
+@media(max-width:700px){.work-item{grid-template-columns:40px 1fr;gap:14px;}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px;}}
+.about-grid p{margin-bottom:17px;}
+.about-grid p:last-child{margin-bottom:0;}
+.capabilities{list-style:none;}
+.capabilities li{padding:18px 0;border-top:1px solid var(--mist);display:grid;grid-template-columns:36px 1fr;gap:12px;}
+.capabilities li:last-child{border-bottom:1px solid var(--mist);}
+.capabilities .cn{font-family:var(--mono);font-size:12px;color:var(--mist-ink);padding-top:3px;}
+.capabilities h4{font-family:var(--display);font-weight:600;font-size:16px;}
+.capabilities p{font-size:15px;color:var(--mist-ink);margin-top:4px;}
+
+/* PROCESS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--mist);border:1px solid var(--mist);}
+@media(max-width:860px){.steps{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.steps{grid-template-columns:1fr;}}
+.step{background:var(--paper);padding:28px 24px;}
+.step .sn{font-family:var(--mono);font-size:11.5px;color:var(--swell);letter-spacing:.06em;}
+.step h4{font-family:var(--display);font-weight:600;font-size:18px;margin:11px 0 8px;}
+.step p{font-size:15px;color:var(--mist-ink);}
+
+/* EXPERIENCE */
+.xp{border-top:1px solid var(--mist);}
+.xp-item{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--mist);}
+@media(max-width:700px){.xp-item{grid-template-columns:1fr;gap:6px;}}
+.xp-item .when{font-family:var(--mono);font-size:12.5px;color:var(--trigger);}
+.xp-item .where{font-family:var(--mono);font-size:11.5px;color:var(--mist-ink);margin-top:5px;}
+.xp-item h3{font-family:var(--display);font-weight:600;font-size:19px;}
+.xp-item .role{font-family:var(--mono);font-size:11.5px;color:var(--mist-ink);margin-top:5px;letter-spacing:.02em;}
+.xp-item p{font-size:16px;color:#27433f;margin-top:10px;max-width:64ch;}
+
+/* SERVICE */
+.service{display:grid;grid-template-columns:54px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--mist);}
+.service:last-child{border-bottom:1px solid var(--mist);}
+.service .pnum{font-family:var(--mono);font-size:13px;color:var(--mist-ink);padding-top:3px;}
+.service h4{font-weight:500;font-size:18px;line-height:1.35;}
+.service .meta{font-family:var(--mono);font-size:12px;color:var(--mist-ink);margin-top:6px;line-height:1.7;}
+.service a{color:var(--swell);border-bottom:1px solid var(--mist);}
+.service a:hover{color:var(--trigger);border-color:var(--trigger);}
+
+/* OFF THE CLOCK */
+.off-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--mist);border:1px solid var(--mist);margin-top:12px;}
+@media(max-width:760px){.off-grid{grid-template-columns:repeat(2,1fr);}}
+.off{background:var(--paper);padding:26px 22px;}
+.off .oi{font-family:var(--mono);font-size:11px;color:var(--swell);letter-spacing:.08em;}
+.off h4{font-family:var(--display);font-weight:600;font-size:17px;margin:10px 0 7px;}
+.off p{font-size:15px;color:var(--mist-ink);}
+
+/* CONTACT */
+.contact{background:var(--ink);color:var(--paper);}
+.contact .sec-head h2{color:var(--paper);}
+.contact p.big{font-size:clamp(19px,2.6vw,26px);line-height:1.45;max-width:38ch;}
+.contact .links{margin-top:34px;display:flex;flex-wrap:wrap;gap:34px;}
+.contact .blk .label{color:#8fa39c;}
+.contact .blk a,.contact .blk span{font-family:var(--display);font-size:16px;color:var(--paper);display:block;margin-top:6px;}
+.contact .blk a:hover{color:var(--trigger);}
+
+footer{padding:30px 0;border-top:1px solid var(--mist);}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  .now .pulse{animation:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav id="nav">
+  <a class="brand" href="#top">
+    <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-linecap="round"><circle cx="60" cy="60" r="46" stroke="#1B6E5E" stroke-width="6" stroke-dasharray="11 8.5"/><path d="M47 28 C60 37, 73 47, 73 60 C73 73, 60 83, 47 92" stroke="#1B6E5E" stroke-width="7.5"/><path d="M73 28 C60 37, 47 47, 47 60 C47 73, 60 83, 73 92" stroke="#FF6B4A" stroke-width="7.5"/><path d="M47 60 H73" stroke="#1B6E5E" stroke-width="5.5"/></g></svg>
+    Krishan Kumar <small>Polymer nanomedicine</small>
+  </a>
+  <div class="navlinks">
+    <a href="#research">Research</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#service">Service</a>
+    <a href="#off">Off the clock</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="now"><span class="pulse"></span>Now: starting an independent group at Valladolid</div>
+      <h1>I build carriers for cargo that <em>breaks</em> on the way.</h1>
+      <p class="lede">Gene editors, enzymes and exosomes all lose activity long before they reach a cell. I design stimuli-responsive polymer nanocarriers that keep them intact, and release them where they are needed.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#research">See the research</a>
+        <a class="btn ghost" href="https://scholar.google.co.in/citations?hl=en&amp;user=G0ysXxgAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener">Google Scholar</a>
+      </div>
+    </div>
+    <div class="portrait">
+        <canvas id="pxl" aria-label="Krishan Kumar" role="img"></canvas>
+        <noscript><img src="portrait-cut.png" alt="Krishan Kumar"></noscript>
+      </div>
+  </div>
+</header>
+
+<div class="track">
+  <div class="wrap">
+    <span class="label">Track record</span>
+    <ul>
+      <li>University of Delhi</li>
+      <li>Inha University</li>
+      <li>POLYMAT · UPV/EHU</li>
+      <li>UBC Vancouver</li>
+      <li>DKFZ Heidelberg</li>
+      <li>Universidad de Valladolid</li>
+    </ul>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:0;padding-bottom:0;">
+  <div class="metrics" style="margin-top:0;border-top:none;">
+    <div class="metric"><div class="n" data-count="45">0</div><div class="d">papers and book chapters</div></div>
+    <div class="metric"><div class="n" data-count="1440">0</div><div class="d">citations</div></div>
+    <div class="metric"><div class="n" data-count="19">0</div><div class="d">h-index</div></div>
+    <div class="metric"><div class="n">€<span data-count="800">0</span>K</div><div class="d">funding secured</div></div>
+  </div>
+</div>
+
+<!-- 01 RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(01)</span><h2>What I work on.</h2></div>
+    <p class="sec-sub reveal">Four lines, one question: how do you get something fragile, intact, to the place it has to act?</p>
+
+    <div class="work-list">
+      <article class="work-item reveal">
+        <div class="wn">01</div>
+        <div>
+          <h3>CRISPR/Cas9 RNP delivery</h3>
+          <p>Polymeric nanocapsules that protect Cas9–sgRNA complexes through formulation, storage and transport across mucosal barriers, then release them intact inside the target cell. Cystic fibrosis is the driving disease context.</p>
+          <div class="tags"><span class="tag">RNP encapsulation</span><span class="tag">mucosal delivery</span><span class="tag">gene editing</span></div>
+        </div>
+      </article>
+
+      <article class="work-item reveal">
+        <div class="wn">02</div>
+        <div>
+          <h3>Stimuli-responsive nanogels</h3>
+          <p>Crosslinked networks engineered to swell, collapse or disassemble on cue — pH, temperature, redox, enzymatic activity — so that mesh size, degradation and the trigger itself can be tuned independently.</p>
+          <div class="tags"><span class="tag">RAFT / ATRP</span><span class="tag">thermoresponsive</span><span class="tag">degradable</span></div>
+        </div>
+      </article>
+
+      <article class="work-item reveal">
+        <div class="wn">03</div>
+        <div>
+          <h3>Protein–polymer hybrids and nanoreactors</h3>
+          <p>Site-selective bioconjugation that grafts synthetic polymers onto proteins and enzymes without disturbing the active site, and enzyme-loaded nanogels that run chemoenzymatic cascades in confinement.</p>
+          <div class="tags"><span class="tag">bioconjugation</span><span class="tag">enzyme stabilisation</span><span class="tag">cascade catalysis</span></div>
+        </div>
+      </article>
+
+      <article class="work-item reveal">
+        <div class="wn">04</div>
+        <div>
+          <h3>Predictive formulation and digital twins</h3>
+          <p>Physics-informed models that predict how size, charge and surface chemistry translate into delivery efficiency, before a batch is ever synthesised. Developed in parallel with Akshar Innovations.</p>
+          <div class="tags"><span class="tag">ML / digital twin</span><span class="tag">formulation design</span><span class="tag">theranostics</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(02)</span><h2>A chemist who formulates.</h2></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I did my PhD at the University of Delhi, then moved to Inha University in South Korea on an NRF fellowship, where I ran a project in my own name for the first time. Spain followed: Juan de la Cierva at POLYMAT, then MSCA COFUND, then an individual Marie Curie fellowship, and now a Ramón y Cajal contract taking me to Valladolid to start a group of my own.</p>
+        <p>Most of that time has been spent on one stubborn problem. A gene editor, an enzyme or an exosome will do exactly what it is supposed to in a tube and almost nothing in a patient, because the journey destroys it. The chemistry that fixes that is not glamorous — crosslink density, mesh size, which cysteine you modify, whether the thing survives freeze-drying — but it is where the therapy is won or lost.</p>
+        <p>Alongside the academic work I co-founded Akshar Innovations, which predicts nanocarrier behaviour computationally, and I lead drug delivery for a precision-therapeutics venture. Both exist for the same reason: formulation decisions made by trial and error are slow, and most of what is learned never leaves the lab notebook.</p>
+      </div>
+      <ul class="capabilities reveal">
+        <li><div class="cn">01</div><div><h4>Formulation</h4><p>Nanogels, nanocapsules and hydrogels from monomer to lyophilised product.</p></div></li>
+        <li><div class="cn">02</div><div><h4>Biologic stabilisation</h4><p>Keeping proteins, RNPs and vesicles active through processing and storage.</p></div></li>
+        <li><div class="cn">03</div><div><h4>Bioconjugation</h4><p>Site-selective chemistry on proteins and nucleic acids.</p></div></li>
+        <li><div class="cn">04</div><div><h4>Predictive modelling</h4><p>Physics-informed and data-driven models of carrier behaviour.</p></div></li>
+        <li><div class="cn">05</div><div><h4>Project leadership</h4><p>Writing, winning and running funded projects across four countries.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(03)</span><h2>How a project runs.</h2></div>
+    <p class="sec-sub reveal">The order matters more than the techniques. Most failed formulations were decided before anything was synthesised.</p>
+    <div class="steps reveal">
+      <div class="step"><div class="sn">01 / 04</div><h4>Define the failure</h4><p>Establish what actually destroys the cargo — and where — before choosing a material.</p></div>
+      <div class="step"><div class="sn">02 / 04</div><h4>Design and predict</h4><p>Pick the chemistry, and model the outcome first so the screen is small and deliberate.</p></div>
+      <div class="step"><div class="sn">03 / 04</div><h4>Make and interrogate</h4><p>Synthesise, then test the thing that would disprove it rather than the thing that confirms it.</p></div>
+      <div class="step"><div class="sn">04 / 04</div><h4>Hand it forward</h4><p>Protocols and parameters written so the result survives the person who produced it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(04)</span><h2>Where I learned it.</h2></div>
+    <div class="xp">
+      <div class="xp-item reveal">
+        <div><div class="when">2026 →</div><div class="where">Valladolid</div></div>
+        <div>
+          <h3>Universidad de Valladolid</h3>
+          <div class="role">Ramón y Cajal Fellow · Condensed Matter Physics, School of Industrial Engineering</div>
+          <p>Starting an independent research line on responsive materials for CRISPR delivery, alongside the BIOFORGE elastin-like recombinamer platform.</p>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="when">2026</div><div class="where">Vancouver · Heidelberg</div></div>
+        <div>
+          <h3>UBC and KiTZ / DKFZ</h3>
+          <div class="role">Visiting researcher</div>
+          <p>Secondments with Prof. Sarah Hedtrich at the University of British Columbia, working on human disease models for gene editing, and with Dr. Marc Zuckermann in preclinical modelling at the Hopp Children's Cancer Center in Heidelberg.</p>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="when">2021 → 2027</div><div class="where">San Sebastián</div></div>
+        <div>
+          <h3>POLYMAT · UPV/EHU</h3>
+          <div class="role">Juan de la Cierva → MSCA COFUND → MSCA Individual Fellow</div>
+          <p>Four consecutive competitive fellowships in Prof. Marcelo Calderón's Responsive Polymer Therapeutics group, building the CRISPR nanogel platform that the current work rests on.</p>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="when">Postdoc</div><div class="where">Incheon, South Korea</div></div>
+        <div>
+          <h3>Inha University</h3>
+          <div class="role">NRF Postdoctoral Fellow</div>
+          <p>First project held in my own name, on polymer self-assembly and stimuli-responsive systems.</p>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="when">PhD</div><div class="where">New Delhi</div></div>
+        <div>
+          <h3>University of Delhi</h3>
+          <div class="role">PhD, Chemistry · DST-SERB and CSIR funded</div>
+          <p>Protein–solvent interactions and the stabilisation of biomolecules in non-conventional media.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SERVICE -->
+<section id="service">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(05)</span><h2>Editorial and service.</h2></div>
+    <div class="reveal">
+      <div class="service">
+        <div class="pnum">[01]</div>
+        <div><h4>Associate Editor, Frontiers in Drug Delivery</h4>
+        <div class="meta">Editorial boards: Discover Molecules (Springer Nature) · Exploration of BioMat-X · Journal of Functional Biomaterials Early Career Board (MDPI)</div></div>
+      </div>
+      <div class="service">
+        <div class="pnum">[02]</div>
+        <div><h4>Guest Editor, two special issues</h4>
+        <div class="meta">Polymeric contrast agents for in vivo imaging — <a href="https://www.frontiersin.org/research-topics/83383/polymeric-contrast-agents-for-invivo-imaging-from-molecular-design-to-multimodal-translation" target="_blank" rel="noopener">Frontiers in Biomaterials Science</a> · Polymeric biomaterials for biomedical applications — <a href="https://www.mdpi.com/journal/jfb/special_issues/MH922484J2" target="_blank" rel="noopener">Journal of Functional Biomaterials</a></div></div>
+      </div>
+      <div class="service">
+        <div class="pnum">[03]</div>
+        <div><h4>Co-editor, Royal Society of Chemistry</h4>
+        <div class="meta">Polymeric Nanocarriers for Antibacterial Therapy and Antimicrobial Resistance</div></div>
+      </div>
+      <div class="service">
+        <div class="pnum">[04]</div>
+        <div><h4>Peer review</h4>
+        <div class="meta">RSC Pharmaceutics · Journal of Molecular Liquids · Journal of Nanobiotechnology · ACS Omega · Polymers · Macromol</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 OFF THE CLOCK -->
+<section id="off">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(06)</span><h2>Off the clock.</h2></div>
+    <p class="sec-sub reveal">Usually on a trail, or sitting somewhere with something worth drinking. Spain has been a good influence on the last two.</p>
+    <div class="off-grid reveal">
+      <div class="off"><div class="oi">01</div><h4>Hiking</h4><p>Best thinking happens a few hours in, with no reception.</p></div>
+      <div class="off"><div class="oi">02</div><h4>Good coffee</h4><p>An entirely reasonable amount, measured carefully, like any other formulation.</p></div>
+      <div class="off"><div class="oi">03</div><h4>Beer</h4><p>Preferably outside, preferably with people who do not work on polymers.</p></div>
+      <div class="off"><div class="oi">04</div><h4>Siesta</h4><p>Non-negotiable. The one piece of Spanish culture I adopted immediately.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="idx">(07)</span><h2>Get in touch.</h2></div>
+    <p class="big reveal">Open to collaborations, student enquiries and conversations about getting fragile things where they need to go.</p>
+    <div class="links reveal">
+      <div class="blk"><div class="label">Email</div><a href="mailto:ks90859@gmail.com">ks90859@gmail.com</a></div>
+      <div class="blk"><div class="label">Based in</div><span>Spain</span></div>
+      <div class="blk"><div class="label">Profiles</div>
+        <a href="https://scholar.google.co.in/citations?hl=en&amp;user=G0ysXxgAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener">Google Scholar ↗</a>
+        <a href="https://orcid.org/0000-0002-4057-0257" target="_blank" rel="noopener">ORCID ↗</a>
+        <a href="https://www.linkedin.com/in/-krishan-kumar/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <div class="blk"><div class="label">Group</div><a href="https://krishan33.github.io/CRISPLab/" target="_blank" rel="noopener">CRISPLab ↗</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="label">© <span id="yr"></span> Krishan Kumar</span>
+    <span class="label">Ramón y Cajal Fellow · Universidad de Valladolid</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const io = new IntersectionObserver((es) => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* pixelate-in portrait */
+(function(){
+  const cv = document.getElementById('pxl');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const img = new Image();
+  img.src = 'portrait-cut.png';
+
+  const steps = [5, 8, 13, 21, 34, 55, 90, 150, 0];   // 0 = full resolution
+  const hold  = 110;                                   // ms per step
+
+  img.onload = () => {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = img.width, h = img.height;
+    cv.width = w * dpr; cv.height = h * dpr;
+    cv.style.aspectRatio = w + ' / ' + h;
+
+    const buf = document.createElement('canvas');
+    const bctx = buf.getContext('2d');
+
+    function draw(blocks){
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,cv.width,cv.height);
+      if (!blocks){
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(img, 0, 0, cv.width, cv.height);
+        cv.style.imageRendering = 'auto';
+        return;
+      }
+      const bw = blocks, bh = Math.max(1, Math.round(blocks * h / w));
+      buf.width = bw; buf.height = bh;
+      bctx.clearRect(0,0,bw,bh);
+      bctx.imageSmoothingEnabled = true;
+      bctx.drawImage(img, 0, 0, bw, bh);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(buf, 0, 0, bw, bh, 0, 0, cv.width, cv.height);
+    }
+
+    if (reduce){ draw(0); return; }
+
+    draw(steps[0]);
+    let i = 0;
+    const io = new IntersectionObserver((es) => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const tick = () => {
+        i++;
+        if (i >= steps.length) return;
+        draw(steps[i]);
+        setTimeout(tick, hold);
+      };
+      setTimeout(tick, 260);
+    }), { threshold: .25 });
+    io.observe(cv);
+  };
+})();
+
+/* count-up metrics */
+const fmt = n => n.toLocaleString('en-GB');
+const countIO = new IntersectionObserver((es) => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, target = +el.dataset.count;
+  countIO.unobserve(el);
+  if (reduce){ el.textContent = fmt(target); return; }
+  const dur = 1400, t0 = performance.now();
+  (function tick(now){
+    const p = Math.min((now - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(Math.round(target * eased));
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}), { threshold: .5 });
+document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+</script>
+</body>
+</html>
